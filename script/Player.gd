@@ -1,4 +1,4 @@
-extends "res://script/LivingEntiti.gd"
+extends LivingEntiti
 class_name Player
 
 # Declare member variables here. Examples:

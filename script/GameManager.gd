@@ -1,7 +1,7 @@
 extends Node
-class_name node
-
-var player : Player
+class_name GameManager
+var player:KinematicBody2D
+#var player : Player
 func get_navpath(a,b):
 	return Navigation.get_s1mple_path(a,b)
 # Declare member variables here. Examples:

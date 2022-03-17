@@ -14,26 +14,26 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://script/AiEntiti.gd"
 }, {
+"base": "Node",
+"class": "GameManager",
+"language": "GDScript",
+"path": "res://script/GameManager.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "LivingEntiti",
 "language": "GDScript",
 "path": "res://script/LivingEntiti.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "LivingEntiti",
 "class": "Player",
 "language": "GDScript",
 "path": "res://script/Player.gd"
-}, {
-"base": "Node",
-"class": "node",
-"language": "GDScript",
-"path": "res://script/GameManager.gd"
 } ]
 _global_script_class_icons={
 "AiEntity": "",
+"GameManager": "",
 "LivingEntiti": "",
-"Player": "",
-"node": ""
+"Player": ""
 }
 
 [application]

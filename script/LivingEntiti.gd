@@ -1,5 +1,7 @@
 extends KinematicBody2D
 class_name LivingEntiti
+export var gamemanager_nodepath:NodePath
+var gamemanager:GameManager
 export var HP:int=20 setget entity_HP_changed
 export var Max_HP:int=20
 func entity_HP_changed(new_value):
@@ -13,6 +15,7 @@ func entity_move(target_vel:Vector2,delta:float):
 	velocity = velocity.move_toward(target_vel,acceleration*delta)
 	velocity = move_and_slide(velocity)
 
+func _ready():gamemanager=get_node_or_null(gamemanager_nodepath) as GameManager
 
 enum EntitiState{
 		DEAD=0,
@@ -26,6 +29,15 @@ export(EntitiState) var state = EntitiState.INACTIVE setget new_state
 func new_state(new_value):
 	state=new_value
 	
+func check_visual_contact(other:LivingEntiti)->bool:
+	var raycast = RayCast.new()
+	gamemanager.add_child(raycast)
+	raycast.cast_to=other.position-position
+	raycast.position=position
+	raycast.force_raycast_update()
+	var return_date:=raycast.get_collider() as LivingEntiti==other
+	raycast.queue_free()
+	return return_date
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"

@@ -1,7 +1,7 @@
 extends "res://script/LivingEntiti.gd"
 class_name AiEntity
 export var visibility:NodePath
-var gamemanager
+var GameManager
 var target:=Vector2()
 func _physics_process(delta):
 	match state:
@@ -14,17 +14,18 @@ func _physics_process(delta):
 		EntitiState.CHASE:
 			process_chase()
 	
-	
 func process_chase():
 	pass
 func process_alive():
 	pass
 func process_patrol():
-	pass
+	if check_visual_contact(gamemanager.player):
+		new_state(EntitiState.CHASE)
 func process_inactive():
 	var v = get_node_or_null(visibility)as VisibilityNotifier2D
 	if v.is_on_screen():
 		new_state(EntitiState.PATROL)
+#func _process_chase():заполнить
 #	target=gamemanager.get_navpath(position,gamemanager.player.position)[1]
 #func entity_calculate_target_velocity():
 #	return position.direction_to(target)*speed
