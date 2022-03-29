@@ -30,7 +30,7 @@ func new_state(new_value):
 	state=new_value
 	
 func check_visual_contact(other:LivingEntiti)->bool:
-	var raycast = RayCast.new()
+	var raycast = RayCast2D.new()
 	gamemanager.add_child(raycast)
 	raycast.cast_to=other.position-position
 	raycast.position=position
@@ -38,6 +38,8 @@ func check_visual_contact(other:LivingEntiti)->bool:
 	var return_date:=raycast.get_collider() as LivingEntiti==other
 	raycast.queue_free()
 	return return_date
+func _physics_process(delta):
+	entity_move(entity_calculate_target_velocity(),delta)
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"

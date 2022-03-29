@@ -2,40 +2,7 @@
 
 [ext_resource path="res://player.png" type="Texture" id=1]
 [ext_resource path="res://gradient4.png" type="Texture" id=2]
-
-[sub_resource type="GDScript" id=1]
-script/source = "extends LivingEntiti
-func entity_calculate_target_velocity()->Vector2:
-	return speed*Input.get_vector(\"left \",\"right\",\"up\",\"down\")
-	
-	
-
-var has_gloc = false
-
-var alive = true
-
-var dead = false
-
-func _ready():
-	$\"/root/Global\".player = self
-
-# warning-ignore:unused_argument
-func _physics_process(delta):
-	entity_move(entity_calculate_target_velocity(),delta)
-	#velocity = move_and_slide(Input.get_vector(\"left \",\"right\",\"up\",\"down\")*speed)
-	if Input.is_action_just_pressed(\"shoot\") and $Timer.is_stopped() and has_gloc:
-		var object = $shoot_ray.get_collider() as Node2D
-		if object.is_in_group(\"enemy\"):
-			object.dead()
-		$Timer.start()
-	look_at(get_global_mouse_position())
-	
-	
-func _on_Area2D_body_entered(body):
-	if body.is_in_group(\"enemy\"):
-		body.activated = true
-	pass # Replace with function body.
-"
+[ext_resource path="res://script/Player.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 50, 20 )
@@ -44,7 +11,7 @@ extents = Vector2( 50, 20 )
 radius = 20.4617
 
 [node name="KinematicBody2D" type="KinematicBody2D" groups=["shoot_ray"]]
-script = SubResource( 1 )
+script = ExtResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( 103.674, 6.14159 )

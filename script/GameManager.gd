@@ -3,7 +3,8 @@ class_name GameManager
 var player:KinematicBody2D
 #var player : Player
 func get_navpath(a,b):
-	return Navigation.get_s1mple_path(a,b)
+	var navigation = $Navigation2D
+	return navigation.get_simple_path(a,b)
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
