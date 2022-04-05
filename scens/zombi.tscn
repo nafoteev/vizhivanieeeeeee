@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://texture/zombi.png" type="Texture" id=1]
+[ext_resource path="res://texture/gradient4.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends KinematicBody2D
+
+var activated = false
+
+var speed = 200
+
+func _physics_process(delta):
+	if activated:
+		var player = $\"/root/Global\".player as KinematicBody2D
+		if player and player.alive:
+			look_at(player.global_position)
+			move_and_slide((player.global_position - global_position).normalized()*7500*delta)
+			if position.distance_to(player.position) < 40.8:
+				get_tree().reload_current_scene()
+	else:
+			 # activated = $VisibilityNotifier2D.is_on_screen()
+			pass
+"
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 19.0761
+
+[node name="KinematicBody2D" type="KinematicBody2D" groups=["enemy"]]
+script = SubResource( 1 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 0.851292, 0.142593 )
+scale = Vector2( 1.64965, 1.6841 )
+texture = ExtResource( 2 )
+energy = 0.48
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -0.0936432, -0.0936432 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -14.2791, -14.8566 )
+scale = Vector2( 1.14699, 1.21524 )
+rect = Rect2( -10, -10, 45, 45 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Node2D" type="Node2D" parent="."]

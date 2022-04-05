@@ -39,12 +39,12 @@ _global_script_class_icons={
 [application]
 
 config/name="project"
-run/main_scene="res://Karta.tscn"
+run/main_scene="res://scens/Karta.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://Global.tscn"
+Global="*res://scens/Global.tscn"
 
 [input]
 

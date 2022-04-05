@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://script/AiEntiti.gd" type="Script" id=1]
+[ext_resource path="res://texture/sobaka.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 17.0
+
+[node name="sobaka" type="KinematicBody2D"]
+script = ExtResource( 1 )
+HP = 3
+Max_HP = 3
+speed = 250.0
+visibility = NodePath("VisibilityNotifier2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -1.42109e-14, 1 )
+scale = Vector2( 1.6, 0.7 )
+
+[node name="Light2D" type="Light2D" parent="."]
