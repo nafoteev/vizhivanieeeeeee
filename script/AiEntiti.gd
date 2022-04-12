@@ -26,14 +26,20 @@ func process_chase():
 func process_alive():
 	new_state(EntitiState.INACTIVE)
 func process_patrol():
-	if check_visual_contact(gamemanager.player):
+	var target_candidate = $"/root/Global".gamemanager.select_target(self)
+	if target_candidate:
 		new_state(EntitiState.CHASE)
+		chase_target = target_candidate
+
 func process_inactive():
 	var v = get_node_or_null(visibility)as VisibilityNotifier2D
 	if v.is_on_screen():
 		new_state(EntitiState.PATROL)
-func entity_calculate_target_velocity():
-	return position.direction_to(target)*speed
+func entity_calculate_target_velocity() -> Vector2:
+	var dist = position.distance_to(target)
+	var vel = position.direction_to(target)*min(speed,dist*10)
+	return vel
+	
 	
 # Declare member variables here. Examples:
 # var a = 2

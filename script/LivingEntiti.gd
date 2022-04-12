@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name LivingEntiti
 export var gamemanager_nodepath:NodePath
-var gamemanager:GameManager
+#var gamemanager:GameManager 
 export var HP:int=20 setget entity_HP_changed
 export var Max_HP:int=20
 func entity_HP_changed(new_value):
@@ -53,3 +53,16 @@ func _physics_process(delta):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+enum EntitiFactions {
+		NEUTRAL = 0,
+		FRIENDLEY = 1,
+		ENEMY = 2,
+}
+export (EntitiFactions) var faction : int
+
+func is_enemy(other : LivingEntiti)->bool:
+	if other.faction == EntitiFactions.NEUTRAL or faction == EntitiFactions.NEUTRAL:
+		return false 
+	else:
+		return other.faction != faction

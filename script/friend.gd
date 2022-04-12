@@ -8,6 +8,7 @@ func process_chase():
 		target=gamemanager.get_navpath(position,gamemanager.player.position.move_toward(position,96))[1]
 	else:
 		new_state(EntitiState.PATROL)
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"

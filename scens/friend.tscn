@@ -12,6 +12,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_vertical_guides_": [  ]
 }
+faction = 1
 visibility = NodePath("VisibilityNotifier2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
