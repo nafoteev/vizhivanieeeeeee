@@ -4,8 +4,8 @@ func _physics_process(delta):
 	pass
 
 func process_chase():
-	if check_visual_contact(gamemanager.player) and gamemanager.player.position.distance_to(position)<500:
-		target=gamemanager.get_navpath(position,gamemanager.player.position.move_toward(position,96))[1]
+	if can_see($"/root/Global".gamemanager.player) and $"/root/Global".gamemanager.player.position.distance_to(position)<500:
+		target=$"/root/Global".gamemanager.get_navpath(position,$"/root/Global".gamemanager.player.position.move_toward(position,96))[1]
 	else:
 		new_state(EntitiState.PATROL)
 

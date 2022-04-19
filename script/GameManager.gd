@@ -29,6 +29,8 @@ func select_target(entity : LivingEntiti) -> LivingEntiti:
 func register_entity(entity : LivingEntiti) -> void:
 	if entity and not entities.has(entity): 
 		entities.append(entity)
+		if entity is Player:
+			player = entity
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"

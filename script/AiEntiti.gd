@@ -1,4 +1,4 @@
-extends "res://script/LivingEntiti.gd"
+extends LivingEntiti
 var chase_target:LivingEntiti  
 var patrol_timer = Timer.new()
 export var visibility_distance = 250
@@ -19,8 +19,8 @@ func _physics_process(delta):
 			process_chase()
 	
 func process_chase():
-	if check_visual_contact(gamemanager.player) and gamemanager.player.position.distance_to(position)<500:
-		target=gamemanager.get_navpath(position,gamemanager.player.position)[1]
+	if can_see($"/root/Global".gamemanager.player) and $"/root/Global".gamemanager.player.position.distance_to(position)<500:
+		target=$"/root/Global".gamemanager.get_navpath(position,$"/root/Global".gamemanager.player.position)[1]
 	else:
 		new_state(EntitiState.PATROL)
 func process_alive():

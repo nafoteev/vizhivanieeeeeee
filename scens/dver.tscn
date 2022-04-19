@@ -9,7 +9,7 @@ export var next_level:PackedScene
 # var a = 2
 # var b = \"text\"
 func _physics_process(delta):
-	var player = $\"/root/Global\".player
+	var player = $\"/root/Global\".gamemanager.player
 	if player is KinematicBody2D:
 		var open = overlaps_body(player)
 		$\"Label\".visible = open

@@ -6,8 +6,9 @@
 extents = Vector2( 13, 13 )
 
 [node name="box" type="RigidBody2D"]
+mass = 55029.5
 gravity_scale = 0.0
-linear_damp = 1.0
+linear_damp = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
