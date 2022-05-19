@@ -1,0 +1,179 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Tilemap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://texture/logo.png" type="Texture" id=2]
+[ext_resource path="res://texture/buttons/pressedl.png" type="Texture" id=3]
+[ext_resource path="res://texture/buttons/hover.png" type="Texture" id=4]
+[ext_resource path="res://texture/buttons/normal.png" type="Texture" id=5]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+
+func _on_Play_pressed():
+	$AnimationPlayer.play(\"fade\")
+	
+	
+func start_game():
+	get_tree().change_scene(\"res://scens/Karta.tscn\")
+	pass # Replace with function body.
+"
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.5, 0.5, 0.5, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../../../TileMap:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fade"
+length = 3.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.5, 0.5, 0.5, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "start_game"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../../TileMap:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 10, 10 ) ]
+}
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TileMap" parent="." instance=ExtResource( 1 )]
+position = Vector2( -1000, 700 )
+rotation = -6.28319
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color( 2, 2, 2, 1 )
+margin_left = 294.0
+margin_top = 183.0
+margin_right = 677.0
+margin_bottom = 398.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Panel"]
+light_mask = 2
+position = Vector2( 178, -91 )
+texture = ExtResource( 2 )
+
+[node name="GridContainer" type="GridContainer" parent="Panel"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -31.0
+margin_top = 15.0
+margin_right = 31.5
+margin_bottom = -15.0
+grow_horizontal = 2
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play" type="TextureButton" parent="Panel/GridContainer"]
+margin_right = 250.0
+margin_bottom = 45.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 4 )
+
+[node name="Button" type="TextureButton" parent="Panel/GridContainer"]
+margin_top = 49.0
+margin_right = 250.0
+margin_bottom = 49.0
+
+[node name="Button2" type="Button" parent="Panel/GridContainer"]
+margin_top = 53.0
+margin_right = 250.0
+margin_bottom = 73.0
+text = "Options"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/GridContainer"]
+root_node = NodePath("../CanvasModulate")
+anims/RESET = SubResource( 2 )
+anims/fade = SubResource( 3 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Panel/GridContainer"]
+position = Vector2( -360.753, -198.004 )
+rotation = -4.29153e-06
+color = Color( 0.5, 0.5, 0.5, 1 )
+
+[connection signal="pressed" from="Panel/GridContainer/Play" to="Panel/GridContainer" method="_on_Play_pressed"]
