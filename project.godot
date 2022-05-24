@@ -38,9 +38,9 @@ _global_script_class_icons={
 
 [application]
 
-config/name="project"
+config/name="Survive"
 run/main_scene="res://scens/Mainmenu.tscn"
-config/icon="res://icon.png"
+config/icon="res://texture/logo.png"
 
 [autoload]
 

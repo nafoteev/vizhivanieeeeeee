@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
+[ext_resource path="res://sobaka.png" type="Texture" id=1]
 [ext_resource path="res://texture/sobaka.png" type="Texture" id=2]
 [ext_resource path="res://gradient 2 .png" type="Texture" id=3]
+[ext_resource path="res://dog.png" type="Texture" id=4]
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends AiEntity
@@ -27,6 +29,42 @@ func _ready():
 [sub_resource type="CircleShape2D" id=1]
 radius = 17.0
 
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "Move",
+"speed": 5.0
+} ]
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends AnimatedSprite
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	var zombi = $\"..\"
+	if zombi.velocity.length()>0.1:
+		play(\"Move\")
+	else:
+		play(\"default\")
+	pass
+"
+
 [node name="sobaka" type="KinematicBody2D"]
 script = SubResource( 2 )
 speed = 150.0
@@ -37,6 +75,7 @@ visibility = NodePath("VisibilityNotifier2D")
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 rotation = 3.14159
 texture = ExtResource( 2 )
 
@@ -46,3 +85,10 @@ scale = Vector2( 1.6, 0.7 )
 
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0.374999, -0.5 )
+scale = Vector2( 0.851563, 0.65625 )
+frames = SubResource( 3 )
+animation = "Move"
+script = SubResource( 4 )

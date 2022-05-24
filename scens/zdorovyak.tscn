@@ -1,11 +1,50 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://script/AiEntiti.gd" type="Script" id=1]
 [ext_resource path="res://texture/gradient3.png" type="Texture" id=2]
 [ext_resource path="res://texture/zdorovyak.png" type="Texture" id=3]
+[ext_resource path="res://zombi 3 move 2.png" type="Texture" id=4]
+[ext_resource path="res://zombi 3 move 1.png" type="Texture" id=5]
+[ext_resource path="res://zdorovyak.png" type="Texture" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 32.0156
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "Move",
+"speed": 5.0
+} ]
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends AnimatedSprite
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	var zombi = $\"..\"
+	if zombi.velocity.length()>0.1:
+		play(\"Move\")
+	else:
+		play(\"default\")
+	pass
+"
 
 [node name="Big zombi" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -24,6 +63,7 @@ position = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 rotation = 3.14159
 texture = ExtResource( 3 )
 
@@ -33,3 +73,10 @@ scale = Vector2( 0.5, 0.64 )
 rect = Rect2( -10, -10, 100, 100 )
 
 [node name="Node2D" type="Node2D" parent="."]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 2, 1 )
+scale = Vector2( 0.895833, 0.791667 )
+frames = SubResource( 2 )
+animation = "Move"
+script = SubResource( 3 )
